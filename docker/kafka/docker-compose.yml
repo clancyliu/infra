@@ -44,7 +44,7 @@ services:
     hostname: kafka-exporter
     container_name: kafka-exporter
     image: danielqsj/kafka-exporter
-    command: [ "--kafka.server=broker:9092" ]
+    command: [ "--kafka.server=broker:29092" ]
     ports:
       - 9308:9308
     networks:
