@@ -33,6 +33,8 @@ services:
   #      - ~/kui/config.yml:/etc/kafkaui/dynamic_config.yaml
 
   kafka-exporter:
+    hostname: kafka-exporter
+    container_name: kafka-exporter
     image: danielqsj/kafka-exporter
     command: [ "--kafka.server=broker:9092" ]
     ports:
