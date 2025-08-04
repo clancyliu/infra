@@ -21,6 +21,10 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+    networks:
+      - my_shared_monitoring_network # Grafana 也连接到共享网络，方便访问 Prometheus
+
+
 
   kafka-ui:
     container_name: kafka-ui
@@ -29,8 +33,12 @@ services:
       - 8080:8080
     environment:
       DYNAMIC_CONFIG_ENABLED: 'true'
-  #    volumes:
-  #      - ~/kui/config.yml:/etc/kafkaui/dynamic_config.yaml
+    #    volumes:
+    #      - ~/kui/config.yml:/etc/kafkaui/dynamic_config.yaml
+    networks:
+      - my_shared_monitoring_network # Grafana 也连接到共享网络，方便访问 Prometheus
+
+
 
   kafka-exporter:
     hostname: kafka-exporter
@@ -39,3 +47,11 @@ services:
     command: [ "--kafka.server=broker:9092" ]
     ports:
       - 9308:9308
+    networks:
+      - my_shared_monitoring_network # Grafana 也连接到共享网络，方便访问 Prometheus
+
+
+
+networks:
+  my_shared_monitoring_network:
+    external: true # 声明这是一个外部创建的网络
