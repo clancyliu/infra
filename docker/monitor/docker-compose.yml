@@ -13,8 +13,6 @@ services:
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
     restart: unless-stopped
-    depends_on:
-      - kafka-exporter # 确保 Kafka Exporter 先启动
 
   # Grafana 服务
   grafana:
